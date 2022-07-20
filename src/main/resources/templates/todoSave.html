@@ -1,0 +1,101 @@
+<!doctype html>
+<html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
+
+<title>My page</title>
+
+<link rel="icon" href="images/favicon.jpg"/>
+
+<meta charset="utf-8"/>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+<meta name="keywords" content="html5,css3,js,jquery,bootstrap,react,es5,es6"/>
+<meta name="description" content="one pages, html5,css3,js,jquery,bootstrap,seo"/>
+<meta name="author" content="Alper Bozcal"/>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text&family=Quicksand:wght@300&display=swap"
+      rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
+<style>
+    tr > td {
+        color: rgb(45, 39, 39);
+    }
+
+</style>
+</head>
+
+<body class="bg-light text-dark">
+
+
+<style>
+
+    .h-custom {
+        height: calc(100% - 73px);
+    }
+    .btn {
+        color: #fffcfc;
+
+        background-color: #0ab3d5
+    }
+
+    @media (max-width: 450px) {
+        .h-custom {
+            height: 100%;
+        }
+    }
+</style>
+
+<section class="vh-100">
+    <div class="container-fluid h-custom">
+        <div class="row d-flex justify-content-center align-items-center h-25">
+            <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-2">
+                <h1>TodoInput</h1>
+            </div>
+            <form th:action="@{/ToDo/save}" method="POST" th:object="${todo_save}">
+                    <div class="form-outline text-lg-start mt-4 pt-2 offset-xl-1 ">
+                        <input type="text" class="form-control form-control-lg"  placeholder="New ToDo" id="todoName" th:field="*{todoName}" />
+                        <label th:if="${#fields.hasErrors('todoName')}" th:errors="*{todoName}"  class="form-label text-danger" >ToDo adı</label>
+                    </div>
+
+                    <div class="form-outline text-lg-start mt-4 pt-2 offset-xl-1">
+                        <input type="submit" class="btn btn-info btn-lg"
+                               style="padding-left: 40rem; padding-right: 40rem;" value="Add New Task">
+                    </div>
+
+                     <div class="col-md-8 col-lg-6 col-xl-4 offset-md-5">
+                         <h1>Todo List</h1>
+                     </div>
+                    <div class="text-center text-lg-start mt-4 pt-2 offset-md-1">
+                    <table class="table">
+                        <tbody>
+                        <tr th:each="karak:${todom_key}">
+                            <td th:text="${karak.todoName}"></td>
+                            <td><input class="form-check-input me-2" type="checkbox" value="" id="form" />
+                            <td><a th:href="@{/update/ToDo/{id}(id=${karak.id})}"><i class="fa fa-pencil text-warning" aria-hidden="true"></i></a></td>
+                            <td><a th:href="@{/delete/ToDo/{id}(id=${karak.id})}"><i class="fa-regular fa-trash-can text-danger"></i></a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>
